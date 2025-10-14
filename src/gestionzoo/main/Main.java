@@ -1,18 +1,27 @@
 package gestionzoo.main;
+import gestionzoo.entities.*;
 
 public class Main {
     public static void main(String[] args) {
         int x;
         boolean test;
-Zoo zoo=new Zoo("belvidere","Tunis",2);
+Zoo zoo=new Zoo("belvidere","Tunis",5);
 Animal lion=new Animal("fefef","Lion",3,true);
 Animal fakroun=new Animal("ededf","fakroun",7,false);
 Animal elephant = new Animal("Elephant", "Elephant", 10, true);
 
 
+Dolphin dolphin = new Dolphin("dalaphin","zoro",2,false,"dddd", 1.2341F);
+Penguin penguin = new Penguin("penguinet","dali",4,true,"ddd",1.2F);
+Dolphin dolphin2 = new Dolphin("dalaphin","bringa",2,false,"dddd", 1.2341F);
+
         System.out.println("Add Lion: " + zoo.addAnimal(lion));
         System.out.println("Add Fakroun: " + zoo.addAnimal(fakroun));
         System.out.println("Add Elephant: " + zoo.addAnimal(elephant));
+
+        zoo.addAquaticAnimal(dolphin);
+        zoo.addAquaticAnimal(penguin);
+        zoo.addAquaticAnimal(dolphin2);
 
       zoo.afficher();
       x=zoo.searchAnimal(elephant);
@@ -29,5 +38,12 @@ Animal elephant = new Animal("Elephant", "Elephant", 10, true);
         else System.out.println("not full");
 
 
+
+        System.out.println(dolphin);
+        System.out.println(penguin);
+        zoo.showAquaticSwim();
+        System.out.println("Profondeur maximale des pinguins : " + zoo.getMaxPenguinDepth());
+
+        System.out.println(dolphin.equals(dolphin2));
     }
 }

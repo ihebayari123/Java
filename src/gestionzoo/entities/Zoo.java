@@ -6,8 +6,13 @@ private Animal [] animals;
 private String name;
 private String city;
 private final int nbrCages;
-private int animeaucount;
+private int animeaucount =0;
 private static final int MAX_ANIMAUX = 25;
+private Aquatic [] aquaticAnimals;
+private int aquaticCount = 0;
+private static final int MAX_AQUATIC = 10;
+
+
 public Zoo(String name,String city,int nbrCages){
     if (nbrCages > MAX_ANIMAUX) {
         System.out.println("Le nombre de cages dépasse la capacité maximale");
@@ -21,11 +26,13 @@ public Zoo(String name,String city,int nbrCages){
     this.city=city;
 
     this.animals=new Animal[nbrCages];
+    this.aquaticAnimals = new Aquatic[MAX_AQUATIC];
+
 
 }
 
-    boolean addAnimal(Animal animal){
-    if (isZooFull()){
+  public  boolean addAnimal(Animal animal){
+    if (isZooFull() == false){
         animals[animeaucount]=animal;
         animeaucount++;
         return true;
@@ -33,13 +40,13 @@ public Zoo(String name,String city,int nbrCages){
     return false;
     }
 
-    void afficher(){
+   public void afficher(){
     for (int i=0;i<animeaucount;i++) {
         System.out.println(animals[i]);
     }
     }
 
-    int searchAnimal(Animal animal){
+   public int searchAnimal(Animal animal){
     for (int i=0;i<animeaucount;i++) {
         if (animal.GetName() == animals[i].GetName()) {
             return i;
@@ -48,7 +55,7 @@ public Zoo(String name,String city,int nbrCages){
     return -1;
     }
 
-    boolean removeAnimal(Animal animal){
+   public boolean removeAnimal(Animal animal){
         int x=searchAnimal(animal);
      if (searchAnimal(animal) == -1 ) return false;
      else{
@@ -61,17 +68,33 @@ public Zoo(String name,String city,int nbrCages){
      }
     }
 
-    boolean isZooFull() {
+   public boolean isZooFull() {
         return animeaucount >= nbrCages;
     }
 
-    Zoo comparerZoo(Zoo z1, Zoo z2) {
+   public Zoo comparerZoo(Zoo z1, Zoo z2) {
         if (z1.animeaucount >= z2.animeaucount) {
             return z1;
         } else {
             return z2;
         }
     }
+
+    public void addAquaticAnimal(Aquatic aquatic) {
+        if (aquaticCount < MAX_AQUATIC) {
+            aquaticAnimals[aquaticCount] = aquatic;
+            aquaticCount++;
+        } else {
+            System.out.println("le zoo ne peux pas contenir des autres animeaux");
+        }
+    }
+
+    public void showAquaticSwim() {
+        for (int i = 0; i < aquaticCount; i++) {
+              aquaticAnimals[i].swim();
+        }
+    }
+
 
     public String GetName() {
         return name;
@@ -84,6 +107,40 @@ public Zoo(String name,String city,int nbrCages){
             this.name = name;
         }
     }
+
+    public float getMaxPenguinDepth() {
+        float maxDepth = 0.0f;
+
+        for (int i = 0; i < aquaticCount; i++) {
+            // Vérifie si l’animal aquatique est un pingouin
+            if (aquaticAnimals[i] instanceof Penguin) {
+                Penguin p = (Penguin) aquaticAnimals[i];
+                if (p.GetSwimmingDepth() > maxDepth) {
+                    maxDepth = p.GetSwimmingDepth();
+                }
+            }
+        }
+
+        return maxDepth;
+    }
+
+    public void displayNumbreOfAquaticsByType() {
+        int dolphinCount = 0;
+        int penguinCount = 0;
+
+        for (int i = 0; i < aquaticCount; i++) {
+            if (aquaticAnimals[i] instanceof Dolphin) {
+                dolphinCount++;
+            } else if (aquaticAnimals[i] instanceof Penguin) {
+                penguinCount++;
+            }
+        }
+
+        System.out.println("Nombre de dauphins : " + dolphinCount);
+        System.out.println("Nombre de pingouins : " + penguinCount);
+    }
+
+
     public String getCity() {
         return city;
     }

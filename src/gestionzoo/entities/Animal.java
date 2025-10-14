@@ -5,8 +5,14 @@ public class Animal {
     private String family;
     private String name;
     private int age;
-    private boolean isMammal;
+    protected boolean isMammal;
 
+    public Animal() {
+        this.family = "";
+        this.name = "";
+        this.age = 0;
+        this.isMammal = false;
+    }
     public Animal (String family,String name,int age,boolean isMammal){
         this.family=family;
         this.name=name;
@@ -16,7 +22,7 @@ public class Animal {
 
     @Override
     public String toString() {
-        return "gestionzoo.entities.Animal{name='" + name + "', family='" + family + "', age=" + age + ", isMammal=" + isMammal + "}";
+        return "Animal {family='" + family + "', name='" + name + "', age=" + age + ", isMammal=" + isMammal + "}";
     }
 
     public void Setfamily(){
